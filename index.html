@@ -1,15 +1,78 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#090612">
 <title>Mesis Client</title>
 <style>
-:root{color-scheme:dark;--purple:#a66cff;--purple2:#6838bf;--green:#42e58c;--panel:rgba(12,9,24,.76)}
-*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Inter,ui-sans-serif,system-ui,sans-serif;color:#f7f1ff;background:#080612;overflow-x:hidden}
-.bg{position:fixed;inset:0;background:linear-gradient(180deg,rgba(5,3,14,.22),rgba(5,3,14,.86)),url('assets/mesis-mountain.png') center/cover no-repeat;filter:saturate(1.15) contrast(1.05);transform:scale(1.04)}
-main{position:relative;min-height:100vh;display:grid;place-items:center;padding:28px}.card{width:min(640px,94vw);border:1px solid rgba(176,118,255,.42);border-radius:26px;background:var(--panel);backdrop-filter:blur(18px);box-shadow:0 28px 90px rgba(79,32,150,.35);padding:28px}
-.top{display:flex;gap:18px;align-items:center}.icon{width:86px;height:86px;border-radius:50%;object-fit:cover;border:2px solid #c490ff;box-shadow:0 0 30px rgba(166,108,255,.45)}h1{margin:0;font-size:clamp(28px,5vw,44px);letter-spacing:.04em}.version{color:#b8aec8;margin-top:5px}.status{display:flex;align-items:center;gap:8px;margin-top:8px;color:#dcd3e8}.dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 14px var(--green)}blockquote{margin:26px 0 20px;font-size:clamp(18px,3vw,25px);font-style:italic;color:#e3d5f7}.actions{display:flex;gap:12px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:white;padding:12px 17px;border-radius:14px;border:1px solid rgba(193,148,255,.28);background:linear-gradient(180deg,rgba(132,73,210,.7),rgba(74,37,126,.72));font-weight:700}.discordMark{width:22px;height:16px;border-radius:7px;background:#fff;position:relative}.discordMark:before,.discordMark:after{content:'';position:absolute;top:6px;width:3px;height:3px;border-radius:50%;background:#6d43bd}.discordMark:before{left:6px}.discordMark:after{right:6px}.fine{margin-top:22px;color:#988da9;font-size:13px}
+:root{
+  color-scheme:dark;
+  --bg:#07050f;--panel:rgba(11,8,23,.80);--panel2:rgba(19,13,36,.82);
+  --purple:#a66cff;--purple2:#7541d3;--purple3:#cfb0ff;--green:#47e78e;
+  --text:#f7f2ff;--muted:#aea4ba;--line:rgba(192,150,255,.20)
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:hidden}
+.bg{position:fixed;inset:0;z-index:-2;background:linear-gradient(180deg,rgba(4,2,12,.24),rgba(4,2,12,.90)),url('assets/mesis-mountain.png') center/cover no-repeat;filter:saturate(1.14) contrast(1.05);transform:scale(1.025)}
+.bg:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 72% 18%,rgba(132,74,231,.18),transparent 34%),linear-gradient(90deg,rgba(7,5,15,.70),rgba(7,5,15,.16) 55%,rgba(7,5,15,.50))}
+nav{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:14px clamp(18px,5vw,70px);background:rgba(7,5,15,.64);backdrop-filter:blur(16px);border-bottom:1px solid rgba(184,136,255,.12)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.04em}.brand img{width:34px;height:34px;border-radius:50%;object-fit:cover;border:1px solid rgba(204,173,255,.55)}
+.navlinks{display:flex;gap:8px}.navlinks a{color:#ddd2ec;text-decoration:none;font-size:14px;padding:8px 11px;border-radius:10px}.navlinks a:hover{background:rgba(166,108,255,.12);color:white}
+.wrap{width:min(1080px,92vw);margin:auto}
+.hero{min-height:76vh;display:flex;align-items:center;padding:78px 0 50px}.heroCard{width:min(720px,100%);padding:34px;border:1px solid rgba(186,137,255,.35);border-radius:30px;background:linear-gradient(180deg,rgba(17,11,34,.82),rgba(9,7,20,.78));box-shadow:0 32px 100px rgba(71,27,134,.28);backdrop-filter:blur(20px)}
+.heroTop{display:flex;align-items:center;gap:20px}.heroIcon{width:94px;height:94px;border-radius:50%;object-fit:cover;border:2px solid var(--purple3);box-shadow:0 0 32px rgba(166,108,255,.40)}
+h1{margin:0;font-size:clamp(36px,7vw,68px);letter-spacing:.01em}.tag{color:#c0b6cc;margin-top:5px}.status{display:flex;align-items:center;gap:8px;margin-top:11px;color:#e6deef}.dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 14px var(--green)}
+.quote{margin:28px 0 20px;font-size:clamp(18px,3vw,25px);font-style:italic;color:#eadcff}.actions{display:flex;gap:12px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:white;padding:12px 17px;border-radius:14px;border:1px solid rgba(193,148,255,.28);background:linear-gradient(180deg,rgba(132,73,210,.72),rgba(74,37,126,.76));font-weight:750;box-shadow:0 10px 28px rgba(79,34,145,.18)}.btn.secondary{background:rgba(18,13,31,.72);color:#daccef}.btn:hover{transform:translateY(-1px);border-color:rgba(216,184,255,.55)}
+.discordMark{width:23px;height:17px;border-radius:7px;background:#fff;position:relative}.discordMark:before,.discordMark:after{content:"";position:absolute;top:6px;width:3px;height:3px;border-radius:50%;background:#7047be}.discordMark:before{left:6px}.discordMark:after{right:6px}
+section.block{padding:54px 0}.eyebrow{text-transform:uppercase;letter-spacing:.18em;color:#bda1e8;font-size:12px;font-weight:800}.block h2{font-size:clamp(28px,4vw,42px);margin:8px 0 9px}.lead{color:var(--muted);max-width:650px;line-height:1.7;margin:0 0 24px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.card{padding:20px;border-radius:19px;border:1px solid var(--line);background:linear-gradient(180deg,var(--panel2),rgba(10,7,20,.72));backdrop-filter:blur(14px)}.card b{display:block;margin-bottom:8px;font-size:17px}.card p{margin:0;color:#aba0b8;line-height:1.55;font-size:14px}
+.steps{counter-reset:step}.step{position:relative;padding-left:54px;min-height:70px}.step:before{counter-increment:step;content:counter(step);position:absolute;left:0;top:0;width:36px;height:36px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(180deg,#9c64ef,#5a2ea7);font-weight:900;box-shadow:0 0 22px rgba(157,99,239,.25)}
+.showcase{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}.shot{min-height:210px;border-radius:22px;border:1px solid var(--line);background:linear-gradient(135deg,rgba(153,88,235,.15),rgba(15,10,28,.68)),url('assets/mesis-mountain.png') center/cover no-repeat;display:flex;align-items:end;padding:20px;overflow:hidden}.shot.small{background:linear-gradient(135deg,rgba(99,53,177,.22),rgba(10,7,21,.88))}.shot span{font-weight:800;letter-spacing:.04em}.shot small{display:block;color:#aaa0b7;margin-top:4px;font-weight:500}
+footer{padding:36px 0 50px;color:#93899e;font-size:13px;border-top:1px solid rgba(190,147,255,.12);margin-top:34px}
+@media(max-width:780px){.grid,.showcase{grid-template-columns:1fr}.hero{min-height:auto;padding-top:60px}.heroCard{padding:24px}.heroTop{align-items:flex-start}.heroIcon{width:74px;height:74px}.navlinks a:not(:last-child){display:none}}
 </style>
 </head>
-<body><div class="bg"></div><main><section class="card"><div class="top"><img class="icon" src="assets/mesis-icon.png" alt="Mesis"><div><h1>Mesis Client</h1><div class="version">V25.1</div><div class="status"><span class="dot"></span> Ready to play</div></div></div><blockquote>“Same game. A better you.”</blockquote><div class="actions"><a class="btn" href="https://discord.gg/FAURnhhvBd"><span class="discordMark"></span>Join Discord</a></div><div class="fine">Mesis • clean purple-night interface • community build</div></section></main></body>
+<body>
+<div class="bg"></div>
+<nav><div class="brand"><img src="assets/mesis-icon.png" alt="Mesis"><span>Mesis Client</span></div><div class="navlinks"><a href="#features">Features</a><a href="#install">Install</a><a href="#showcase">Showcase</a><a href="https://discord.gg/FAURnhhvBd" target="_blank" rel="noreferrer">Discord</a></div></nav>
+<main class="wrap">
+  <section class="hero">
+    <div class="heroCard">
+      <div class="heroTop"><img class="heroIcon" src="assets/mesis-icon.png" alt="Mesis Client"><div><h1>Mesis Client</h1><div class="tag">V25.1 • Minecraft 1.21.11</div><div class="status"><span class="dot"></span> Ready to play</div></div></div>
+      <div class="quote">“Same game. A better you.”</div>
+      <div class="actions"><a class="btn" href="https://discord.gg/FAURnhhvBd" target="_blank" rel="noreferrer"><span class="discordMark"></span>Join Discord</a><a class="btn secondary" href="#features">Explore Mesis</a></div>
+    </div>
+  </section>
+
+  <section class="block" id="features">
+    <div class="eyebrow">Mesis experience</div><h2>Fast to find. Easy to control.</h2>
+    <p class="lead">A compact client interface built around quick discovery, clear controls, visual customization, and focused tools without burying everything behind menus.</p>
+    <div class="grid">
+      <div class="card"><b>Visual FX</b><p>Custom glint, sky effects, glow controls and a cleaner visual layer that stays configurable.</p></div>
+      <div class="card"><b>Finder tools</b><p>World and block utilities organized around clear signals, focused results and readable overlays.</p></div>
+      <div class="card"><b>Compact GUI</b><p>Search-first navigation, direct keybind editing, theme accents and less wasted screen space.</p></div>
+      <div class="card"><b>Combat utilities</b><p>Quick-access modules and settings designed so you can reach what you need without digging through pages.</p></div>
+      <div class="card"><b>Profiles & config</b><p>Keep different setups ready for different play styles and swap between them without rebuilding everything.</p></div>
+      <div class="card"><b>Community</b><p>Discord access is built directly into the client and the site for support, testing and updates.</p></div>
+    </div>
+  </section>
+
+  <section class="block" id="install">
+    <div class="eyebrow">Quick start</div><h2>Three steps to launch.</h2>
+    <div class="grid steps">
+      <div class="card step"><b>Get the client</b><p>Use the current Mesis build provided through the project or community release channel.</p></div>
+      <div class="card step"><b>Place it in mods</b><p>Use the matching Fabric / Minecraft version and place the Mesis JAR in your mods folder.</p></div>
+      <div class="card step"><b>Open Mesis</b><p>Launch Minecraft, open the GUI, search a module and change its keybind or settings directly.</p></div>
+    </div>
+  </section>
+
+  <section class="block" id="showcase">
+    <div class="eyebrow">Showcase</div><h2>Purple-night by default. Yours after that.</h2>
+    <p class="lead">Mesis keeps the purple-night identity but the interface is moving toward smaller layouts, cleaner panels and user-selectable accent themes.</p>
+    <div class="showcase"><div class="shot"><span>Mesis V25.1<small>Compact interface • quick search • visual-first identity</small></span></div><div class="shot small"><span>Theme-ready UI<small>Purple • Gold • Cyan • Custom direction</small></span></div></div>
+  </section>
+
+  <footer>Mesis Client • V25.1 • Community build</footer>
+</main>
+</body>
 </html>
